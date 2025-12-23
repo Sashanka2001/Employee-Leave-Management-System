@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { auth } from "../middleware/auth.js";
+import LeaveRequest from "../models/LeaveRequest.js";
 
 const router = express.Router();
 
@@ -51,8 +52,26 @@ router.get("/me", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
     if (!user) return res.status(404).json({ msg: "User not found" });
-    const leaveBalance = user.leaveBalance ? Object.fromEntries(user.leaveBalance) : {};
-    res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role, leaveBalance } });
+
+    // Build effective leave balance by subtracting approved leave days from stored balance
+    const stored = user.leaveBalance ? Object.fromEntries(user.leaveBalance) : {};
+
+    // Aggregate approved leaves for this user by leave type name
+    const approvedLeaves = await LeaveRequest.find({ user: req.user._id, status: "APPROVED" }).populate("type");
+    const used = {};
+    for (const l of approvedLeaves) {
+      const tname = l.type ? String(l.type.name).toUpperCase() : "UNKNOWN";
+      used[tname] = (used[tname] || 0) + (l.days || 0);
+    }
+
+    const effective = {};
+    for (const [k, v] of Object.entries(stored)) {
+      const key = String(k).toUpperCase();
+      const usedDays = used[key] || 0;
+      effective[key] = Math.max(0, (Number(v) || 0) - usedDays);
+    }
+
+    res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role, leaveBalance: effective } });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
