@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* small helper for the link-style button used on forms */
+.link-btn { @apply text-blue-600 hover:underline bg-transparent border-none p-0 cursor-pointer; }
+
+/* fallback small container tweaks so layout remains similar */
+.login-container { max-width: 420px; padding: 16px; margin: 0 auto; }
+.card { @apply bg-white dark:bg-gray-800 p-7 rounded-lg shadow-lg; }
+.note { @apply text-sm text-gray-500 mt-3; }
