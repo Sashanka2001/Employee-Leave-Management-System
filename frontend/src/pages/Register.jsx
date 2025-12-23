@@ -30,12 +30,10 @@ export default function Register({ switchView, onAuth }) {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.msg || "Registration failed");
-      const userRole = data.user?.role;
-      localStorage.setItem("lms_token", data.token);
-      localStorage.setItem("lms_role", userRole);
-      localStorage.setItem("lms_name", data.user?.name || "");
-      setMessage({ type: "success", text: "Registration successful." });
-      if (onAuth) onAuth({ token: data.token, role: userRole, name: data.user?.name });
+      // Do not auto-login after registration. Require explicit sign in.
+      setMessage({ type: "success", text: "Registration successful. Please sign in using your credentials." });
+      // Switch to the login view so the user can sign in manually
+      if (switchView) switchView("login");
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     } finally {
