@@ -49,21 +49,4 @@ npm run dev
 
 The frontend dev server uses Vite (default port 5173). Backend runs on port 5000 by default.
 
-Notes / Recent changes
-- Some icon usage (lucide-react) caused React runtime errors in this environment. Icons in several pages were temporarily replaced with emoji spans to avoid errors. You can switch to a compatible icon library (e.g. `@heroicons/react`) if desired.
-- Admin decision flow now accepts an `adminComment` (sent from frontend as `comment`) and stores it on the leave request; notifications include the admin comment.
-- The app uses JWT stored in `localStorage` under `lms_token`.
-
-Testing
-- Register or create test users, create leave types (admin), then apply for leave as an employee and approve/reject as admin.
-- Check the Network tab for API request/response details if something doesn't appear.
-
-Development notes
-- Backend is ESM (uses `import`); run with Node 16+.
-- If you change Mongoose schemas, restart the backend server.
-
-Contributing
-- Fork / branch and open PRs for fixes/features.
-
-Contact
-- This workspace is local to your machine; refer to the files in `backend/` and `frontend/` for implementation details.
+ 
