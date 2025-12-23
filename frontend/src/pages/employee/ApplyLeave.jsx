@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function ApplyLeave() {
+export default function ApplyLeave({ onApplied }) {
   const [types, setTypes] = useState([]);
   const [typeId, setTypeId] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -28,6 +28,8 @@ export default function ApplyLeave() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.msg || "Failed");
       setMessage({ type: "success", text: "Leave applied" });
+      // notify parent to refresh balances/history
+      if (onApplied) onApplied();
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     }

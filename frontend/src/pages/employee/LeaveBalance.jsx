@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from "react";
 
-export default function LeaveBalance() {
+export default function LeaveBalance({ refreshKey }) {
   const [balance, setBalance] = useState(null);
   const [message, setMessage] = useState(null);
 
-  useEffect(() => {
+  const fetchBalance = async () => {
     const token = localStorage.getItem("lms_token");
     if (!token) return;
-    fetch("http://localhost:5000/api/auth/me", { headers: { Authorization: `Bearer ${token}` } })
-      .then(async (r) => {
-        if (!r.ok) throw new Error("failed");
-        const data = await r.json();
-        // API returns the user object: { user: { ..., leaveBalance: { ... } } }
-        const lb = data?.user?.leaveBalance || null;
-        // Show 'No data' when leaveBalance is missing or empty
-        if (!lb || Object.keys(lb).length === 0) setBalance(null);
-        else setBalance(lb);
-      })
-      .catch(() => setMessage("Unable to fetch balance"));
+    try {
+      const r = await fetch("http://localhost:5000/api/auth/me", { headers: { Authorization: `Bearer ${token}` } });
+      if (!r.ok) throw new Error("failed");
+      const data = await r.json();
+      const lb = data?.user?.leaveBalance || null;
+      if (!lb || Object.keys(lb).length === 0) setBalance(null);
+      else setBalance(lb);
+      setMessage(null);
+    } catch (err) {
+      setMessage("Unable to fetch balance");
+    }
+  };
+
+  // initial fetch and refetch when parent triggers (refreshKey)
+  useEffect(() => {
+    fetchBalance();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshKey]);
+
+  // polling to keep data reasonably up-to-date (every 10s)
+  useEffect(() => {
+    const id = setInterval(fetchBalance, 10000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

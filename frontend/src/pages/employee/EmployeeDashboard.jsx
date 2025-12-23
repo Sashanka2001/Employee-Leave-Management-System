@@ -6,6 +6,9 @@ import Notifications from "../../components/Notifications";
 
 export default function EmployeeDashboard({ user, onLogout }) {
   const [page, setPage] = useState("apply");
+  // a simple refresh key to trigger child components to refetch
+  const [refreshKey, setRefreshKey] = useState(0);
+  const triggerRefresh = () => setRefreshKey((k) => k + 1);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
@@ -27,9 +30,9 @@ export default function EmployeeDashboard({ user, onLogout }) {
       </aside>
 
       <main className="flex-1 p-8 text-gray-900 dark:text-gray-100">
-        {page === "apply" && <ApplyLeave />}
-        {page === "balance" && <LeaveBalance />}
-        {page === "history" && <ApplicationHistory />}
+        {page === "apply" && <ApplyLeave onApplied={triggerRefresh} />}
+        {page === "balance" && <LeaveBalance refreshKey={refreshKey} />}
+        {page === "history" && <ApplicationHistory refreshKey={refreshKey} />}
       </main>
     </div>
   );
