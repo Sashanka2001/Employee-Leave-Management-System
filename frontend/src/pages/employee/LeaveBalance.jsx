@@ -11,9 +11,11 @@ export default function LeaveBalance() {
       .then(async (r) => {
         if (!r.ok) throw new Error("failed");
         const data = await r.json();
-        // leaveBalance stored as map on server; convert if needed
-        const lb = data.leaveBalance || data.leaveBalance || {};
-        setBalance(lb);
+        // API returns the user object: { user: { ..., leaveBalance: { ... } } }
+        const lb = data?.user?.leaveBalance || null;
+        // Show 'No data' when leaveBalance is missing or empty
+        if (!lb || Object.keys(lb).length === 0) setBalance(null);
+        else setBalance(lb);
       })
       .catch(() => setMessage("Unable to fetch balance"));
   }, []);
