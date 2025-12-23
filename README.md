@@ -33,7 +33,6 @@ Environment
 ```
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/leave-management
-JWT_SECRET=your_secret_here
 ```
 
 Running
@@ -49,19 +48,6 @@ npm run dev
 ```
 
 The frontend dev server uses Vite (default port 5173). Backend runs on port 5000 by default.
-
-API Endpoints (summary)
-- `POST /api/auth/register` — register user (returns token)
-- `POST /api/auth/login` — login (returns token)
-- `GET /api/auth/me` — get current user and leave balances
-- `GET /api/leavetypes` — list leave types
-- `POST /api/leavetypes` — create leave type (admin)
-- `POST /api/leaves` — apply for leave (auth)
-- `GET /api/leaves/my` — current user's leaves
-- `GET /api/leaves` — admin: list leaves (filters: `typeId`, `status`, `userId`)
-- `PUT /api/leaves/:id/decision` — admin approve/reject a leave; body: `{ decision: 'APPROVED'|'REJECTED', comment?: '...' }`
-- `GET /api/leaves/report?month=YYYY-MM` — monthly aggregated report (admin)
-- `GET /api/notifications` — fetch notifications
 
 Notes / Recent changes
 - Some icon usage (lucide-react) caused React runtime errors in this environment. Icons in several pages were temporarily replaced with emoji spans to avoid errors. You can switch to a compatible icon library (e.g. `@heroicons/react`) if desired.
