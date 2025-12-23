@@ -47,6 +47,6 @@ cd frontend
 npm run dev
 ```
 
-The frontend dev server uses Vite (default port 5173). Backend runs on port 5000 by default.
+ 
 
  
