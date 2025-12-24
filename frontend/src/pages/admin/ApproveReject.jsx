@@ -124,13 +124,13 @@ export default function ApproveReject() {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'APPROVED':
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
+        return <span className="w-5 h-5 text-green-500">✅</span>;
       case 'REJECTED':
-        return <XCircle className="w-5 h-5 text-red-500" />;
+        return <span className="w-5 h-5 text-red-500">❌</span>;
       case 'PENDING':
-        return <Clock className="w-5 h-5 text-yellow-500" />;
+        return <span className="w-5 h-5 text-yellow-500">🕒</span>;
       default:
-        return <AlertCircle className="w-5 h-5 text-gray-500" />;
+        return <span className="w-5 h-5 text-gray-500">⚠️</span>;
     }
   };
 
