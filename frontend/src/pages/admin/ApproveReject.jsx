@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CheckCircle, XCircle, Clock, Filter, X, AlertCircle, FileText, Calendar, User, MessageSquare } from "lucide-react";
+// Replaced lucide-react icons with emoji fallbacks to avoid runtime render errors
 
 export default function ApproveReject() {
   const [leaves, setLeaves] = useState([]);
@@ -168,9 +168,9 @@ export default function ApproveReject() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
-          <FileText className="w-6 h-6 text-white" />
-        </div>
+        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-semibold">
+            📄
+          </div>
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Leave Requests</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">Review and manage employee leave applications</p>
@@ -180,7 +180,7 @@ export default function ApproveReject() {
       {/* Filters */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
         <div className="flex items-center gap-3 mb-3">
-          <Filter className="w-5 h-5 text-gray-400" />
+          <span className="w-5 h-5 text-gray-400">🔽</span>
           <h3 className="font-semibold text-gray-900 dark:text-gray-100">Filters</h3>
         </div>
         
@@ -216,7 +216,7 @@ export default function ApproveReject() {
               onClick={() => { setFilterType(""); setFilterStatus(""); }} 
               className="flex items-center gap-1 px-3 py-2 text-sm text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors"
             >
-              <X className="w-4 h-4" />
+              <span className="w-4 h-4">❌</span>
               Clear all
             </button>
           )}
@@ -226,7 +226,7 @@ export default function ApproveReject() {
       {/* Error Message */}
       {error && (
         <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+          <span className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5">⚠️</span>
           <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
         </div>
       )}
@@ -244,8 +244,8 @@ export default function ApproveReject() {
       {/* Empty State */}
       {!loading && leaves.length === 0 && (
         <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-12 text-center">
-          <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FileText className="w-8 h-8 text-gray-400" />
+          <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400 text-2xl">
+            📄
           </div>
           <p className="text-gray-500 dark:text-gray-400 font-medium">No leave requests found</p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
@@ -284,18 +284,18 @@ export default function ApproveReject() {
 
                 {/* Leave Details */}
                 <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-gray-400" />
-                    <span className="font-semibold text-gray-900 dark:text-gray-100">{leave.type?.name || 'Leave Type'}</span>
-                  </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-4 h-4 text-gray-400">📄</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{leave.type?.name || 'Leave Type'}</span>
+                    </div>
                   
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 flex-wrap">
                     <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
+                      <span className="w-4 h-4">📅</span>
                       <span>{formatDateRange(leave.startDate, leave.endDate)}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
+                      <span className="w-4 h-4">🕒</span>
                       <span>{calculateDuration(leave.startDate, leave.endDate)}</span>
                     </div>
                   </div>
@@ -303,7 +303,7 @@ export default function ApproveReject() {
                   {leave.reason && (
                     <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                       <div className="flex items-start gap-2">
-                        <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5" />
+                        <span className="w-4 h-4 text-gray-400 mt-0.5">💬</span>
                         <div>
                           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Reason: </span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{leave.reason}</span>
@@ -315,8 +315,8 @@ export default function ApproveReject() {
 
                 {/* Admin Comment Section */}
                 <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                    <MessageSquare className="w-4 h-4 text-gray-400" />
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="w-4 h-4 text-gray-400">💬</span>
                     Admin Comment
                     {leave.status === 'PENDING' && (
                       <span className="text-xs text-red-600 dark:text-red-400">(required for rejection)</span>
@@ -340,7 +340,7 @@ export default function ApproveReject() {
                       disabled={processingIds.has(leave._id)}
                       className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                     >
-                      <CheckCircle className="w-4 h-4" />
+                      <span className="w-4 h-4">✅</span>
                       {processingIds.has(leave._id) ? 'Processing...' : 'Approve'}
                     </button>
                     <button
@@ -348,7 +348,7 @@ export default function ApproveReject() {
                       disabled={processingIds.has(leave._id)}
                       className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                     >
-                      <XCircle className="w-4 h-4" />
+                      <span className="w-4 h-4">❌</span>
                       {processingIds.has(leave._id) ? 'Processing...' : 'Reject'}
                     </button>
                   </div>
@@ -358,7 +358,7 @@ export default function ApproveReject() {
                 {leave.status !== 'PENDING' && leave.adminResponse && (
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
                     <div className="flex items-start gap-2">
-                      <MessageSquare className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5" />
+                      <span className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5">💬</span>
                       <div>
                         <span className="text-sm font-medium text-blue-900 dark:text-blue-200">Admin Response: </span>
                         <span className="text-sm text-blue-800 dark:text-blue-300">{leave.adminResponse}</span>
