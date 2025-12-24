@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function LeaveBalance({ refreshKey }) {
   const [balance, setBalance] = useState(null);
   const [message, setMessage] = useState(null);
+  const [leaveTypes, setLeaveTypes] = useState([]);
 
   const fetchBalance = async () => {
     const token = localStorage.getItem("lms_token");
@@ -20,9 +21,22 @@ export default function LeaveBalance({ refreshKey }) {
     }
   };
 
+  const fetchLeaveTypes = async () => {
+    try {
+      const r = await fetch("http://localhost:5000/api/leavetypes");
+      if (!r.ok) throw new Error("failed");
+      const data = await r.json();
+      setLeaveTypes(data || []);
+    } catch (err) {
+      // ignore - leaveTypes stays empty
+      setLeaveTypes([]);
+    }
+  };
+
   // initial fetch and refetch when parent triggers (refreshKey)
   useEffect(() => {
     fetchBalance();
+    fetchLeaveTypes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshKey]);
 
