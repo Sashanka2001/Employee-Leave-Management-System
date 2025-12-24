@@ -66,4 +66,37 @@ This will connect to your MongoDB and set `leaveBalance` for all users to the va
 
  
 
+## Developer notes
+
+- Recommended: install React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+
+- Recent fixes and troubleshooting:
+	- `lucide-react` icon components caused runtime errors in development ("Objects are not valid as a React child"). As a temporary stability fix, several admin/employee pages now use emoji fallbacks for icons. Affected files include:
+		- `frontend/src/pages/employee/LeaveBalance.jsx`
+		- `frontend/src/pages/employee/ApplyLeave.jsx`
+		- `frontend/src/pages/employee/ApplicationHistory.jsx`
+		- `frontend/src/pages/admin/ApproveReject.jsx`
+	- If you prefer SVG icons, reinstall or fix `lucide-react` and restore icons in those files.
+
+- UX change: new user registration no longer auto-signs-in. After registering, users must sign in via the login view.
+
+- How to run and debug locally:
+	- Start backend:
+
+```bash
+cd backend
+node server.js
+```
+
+	- Start frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+	- Open the app in the browser (Vite will show the URL). Use React DevTools and your browser console to inspect any runtime errors.
+
  
+
+
