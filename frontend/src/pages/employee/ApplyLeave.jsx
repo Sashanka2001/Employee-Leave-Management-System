@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Send, Calendar, FileText, AlertCircle, CheckCircle, Clock } from "lucide-react";
+// Replaced lucide-react icons with emojis to avoid rendering issues
 
 export default function ApplyLeave({ onApplied }) {
   const [types, setTypes] = useState([]);
@@ -104,7 +104,7 @@ export default function ApplyLeave({ onApplied }) {
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
-          <Send className="w-6 h-6 text-white" />
+          <span className="text-white text-2xl">📤</span>
         </div>
         <div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Apply for Leave</h3>
@@ -118,7 +118,7 @@ export default function ApplyLeave({ onApplied }) {
           {/* Leave Type */}
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-              <FileText className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-400">📄</span>
               Leave Type
             </label>
             {loadingTypes ? (
@@ -149,7 +149,7 @@ export default function ApplyLeave({ onApplied }) {
             {/* Start Date */}
             <div className="space-y-2">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                <Calendar className="w-4 h-4 text-gray-400" />
+                <span className="text-gray-400">📅</span>
                 Start Date
               </label>
               <input
@@ -166,7 +166,7 @@ export default function ApplyLeave({ onApplied }) {
             {/* End Date */}
             <div className="space-y-2">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                <Calendar className="w-4 h-4 text-gray-400" />
+                <span className="text-gray-400">📅</span>
                 End Date
               </label>
               <input
@@ -184,7 +184,7 @@ export default function ApplyLeave({ onApplied }) {
           {/* Duration Display */}
           {duration && (
             <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-              <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-blue-600 dark:text-blue-400">⏰</span>
               <span className="text-sm text-blue-800 dark:text-blue-200">
                 Duration: <span className="font-semibold">{duration} day{duration !== 1 ? 's' : ''}</span>
               </span>
@@ -214,9 +214,9 @@ export default function ApplyLeave({ onApplied }) {
                 : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800'
             }`}>
               {message.type === "error" ? (
-                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="flex-shrink-0 mt-0.5">❗</span>
               ) : (
-                <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="flex-shrink-0 mt-0.5">✅</span>
               )}
               <p className="text-sm">{message.text}</p>
             </div>
@@ -229,7 +229,7 @@ export default function ApplyLeave({ onApplied }) {
               disabled={loading || loadingTypes}
               className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/30 flex items-center justify-center gap-2"
             >
-              <Send className="w-5 h-5" />
+              <span className="w-5 h-5">📤</span>
               {loading ? "Submitting..." : "Submit Application"}
             </button>
           </div>
