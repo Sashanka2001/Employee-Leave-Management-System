@@ -1,6 +1,6 @@
 # Leave Management System
 
-A simple full-stack leave management application (Node.js + Express backend, MongoDB, React + Vite frontend, Tailwind CSS).
+A MERN full-stack leave management application (Node.js + Express backend, MongoDB, React + Vite frontend, Tailwind CSS).
 
 ## Features
 - JWT authentication (Employee & Admin roles)
