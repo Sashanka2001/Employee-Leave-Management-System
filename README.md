@@ -49,7 +49,7 @@ npm run dev
 
 ### Update all users' leave balances
 
-To set the default leave balances for all users to ANNUAL:5, CASUAL:5, MEDICAL:5 (applies to new users and can update existing users), two changes are provided:
+To set the default leave balances for all users to ANNUAL:5, CASUAL:5, MEDICAL:10 (applies to new users and can update existing users), two changes are provided:
 
 - The backend model default has been updated to the new values.
 - A small script is included to update existing users in your database.
@@ -62,7 +62,7 @@ npm install
 node scripts/update_leave_balances.js
 ```
 
-This will connect to your MongoDB and set `leaveBalance` for all users to the values above.
+This will connect to your MongoDB and set `leaveBalance` for all users to the values above (ANNUAL:5, CASUAL:5, MEDICAL:10).
 
  
 
