@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, CheckCircle, XCircle, Clock, AlertCircle, FileText } from "lucide-react";
+// Replaced lucide icons with emojis to avoid rendering issues
 
 export default function ApplicationHistory() {
   const [leaves, setLeaves] = useState([]);
@@ -30,13 +30,13 @@ export default function ApplicationHistory() {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'APPROVED':
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
+        return <span className="w-5 h-5 text-green-500">✅</span>;
       case 'REJECTED':
-        return <XCircle className="w-5 h-5 text-red-500" />;
+        return <span className="w-5 h-5 text-red-500">❌</span>;
       case 'PENDING':
-        return <Clock className="w-5 h-5 text-yellow-500" />;
+        return <span className="w-5 h-5 text-yellow-500">⏳</span>;
       default:
-        return <AlertCircle className="w-5 h-5 text-gray-500" />;
+        return <span className="w-5 h-5 text-gray-500">⚠️</span>;
     }
   };
 
@@ -128,8 +128,8 @@ export default function ApplicationHistory() {
                   {/* Header Row */}
                   <div className="flex items-center gap-3 flex-wrap">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-                        <FileText className="w-4 h-4 text-white" />
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-white">
+                        📄
                       </div>
                       <span className="font-semibold text-gray-900 dark:text-gray-100">
                         {leave.type?.name || "Leave Type"}
@@ -146,11 +146,11 @@ export default function ApplicationHistory() {
                   {/* Date and Duration Info */}
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 flex-wrap">
                     <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
+                      <span className="w-4 h-4">📅</span>
                       <span>{formatDateRange(leave.startDate, leave.endDate)}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
+                      <span className="w-4 h-4">⏰</span>
                       <span>{calculateDuration(leave.startDate, leave.endDate)}</span>
                     </div>
                   </div>
