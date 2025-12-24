@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 export default function LeaveBalance({ refreshKey }) {
   const [balance, setBalance] = useState(null);
   const [message, setMessage] = useState(null);
-  const [leaveTypes, setLeaveTypes] = useState([]);
 
   const fetchBalance = async () => {
     const token = localStorage.getItem("lms_token");
@@ -21,22 +20,9 @@ export default function LeaveBalance({ refreshKey }) {
     }
   };
 
-  const fetchLeaveTypes = async () => {
-    try {
-      const r = await fetch("http://localhost:5000/api/leavetypes");
-      if (!r.ok) throw new Error("failed");
-      const data = await r.json();
-      setLeaveTypes(data || []);
-    } catch (err) {
-      // ignore - leaveTypes stays empty
-      setLeaveTypes([]);
-    }
-  };
-
   // initial fetch and refetch when parent triggers (refreshKey)
   useEffect(() => {
     fetchBalance();
-    fetchLeaveTypes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshKey]);
 
@@ -50,30 +36,17 @@ export default function LeaveBalance({ refreshKey }) {
   return (
     <div>
       <h3 className="text-xl font-semibold mb-4">Leave balance</h3>
-        {!balance && leaveTypes.length === 0 && <div className="text-sm text-gray-500">No data</div>}
-        {(leaveTypes.length > 0 || balance) && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {leaveTypes.length > 0
-              ? leaveTypes.map((t) => {
-                  const key = String(t.name).toUpperCase();
-                  const val = (balance && balance[key] != null) ? balance[key] : 0;
-                  return (
-                    <div key={t._id} className="p-3 border rounded">
-                      <div className="text-sm text-gray-500">{key}</div>
-                      <div className="text-lg font-semibold">{val}</div>
-                      <div className="text-xs text-gray-400 mt-1">Remaining days</div>
-                    </div>
-                  );
-                })
-              : Object.entries(balance || {}).map(([k, v]) => (
-                  <div key={k} className="p-3 border rounded">
-                    <div className="text-sm text-gray-500">{k}</div>
-                    <div className="text-lg font-semibold">{v}</div>
-                    <div className="text-xs text-gray-400 mt-1">Remaining days</div>
-                  </div>
-                ))}
-          </div>
-        )}
+      {!balance && <div className="text-sm text-gray-500">No data</div>}
+      {balance && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {Object.entries(balance).map(([k, v]) => (
+            <div key={k} className="p-3 border rounded">
+              <div className="text-sm text-gray-500">{k}</div>
+              <div className="text-lg font-semibold">{v}</div>
+            </div>
+          ))}
+        </div>
+      )}
       {message && <div className="mt-3 text-red-600">{message}</div>}
     </div>
   );
