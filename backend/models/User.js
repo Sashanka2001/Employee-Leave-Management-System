@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema(
 		leaveBalance: {
 			type: Map,
 			of: Number,
-			// default balances updated to match requested values
-			default: { ANNUAL: 5, CASUAL: 5, MEDICAL: 5 },
+			// default balances updated; MEDICAL set to 10
+			default: { ANNUAL: 5, CASUAL: 5, MEDICAL: 10 },
 		},
 	},
 	{ timestamps: true }

@@ -4,7 +4,7 @@ import User from '../models/User.js';
 
 dotenv.config();
 
-const defaults = { ANNUAL: 5, CASUAL: 5, MEDICAL: 5 };
+const defaults = { ANNUAL: 5, CASUAL: 5, MEDICAL: 10 };
 
 async function run() {
   try {
