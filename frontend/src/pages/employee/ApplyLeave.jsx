@@ -194,7 +194,7 @@ export default function ApplyLeave({ onApplied }) {
           {/* Reason */}
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-              <FileText className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-400">📝</span>
               Reason (Optional)
             </label>
             <textarea
