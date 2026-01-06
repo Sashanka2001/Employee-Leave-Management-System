@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiFileText } from "react-icons/fi";
+// import { FiFileText } from "react-icons/fi";
 // Replaced lucide icons with emojis to avoid rendering issues
 
 export default function ApplicationHistory() {
@@ -109,7 +109,7 @@ export default function ApplicationHistory() {
       {!loading && !message && leaves.length === 0 && (
         <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-12 text-center">
           <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FiFileText className="w-8 h-8 text-gray-400" />
+            <span className="w-8 h-8 text-gray-400">📄</span>
           </div>
           <p className="text-gray-500 dark:text-gray-400 font-medium">No leave applications yet</p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Your leave requests will appear here</p>
