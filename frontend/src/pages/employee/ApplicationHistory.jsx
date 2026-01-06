@@ -100,7 +100,7 @@ export default function ApplicationHistory() {
       {/* Error Message */}
       {message && (
         <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+          <span className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5">❗</span>
           <p className="text-sm text-red-800 dark:text-red-200">{message}</p>
         </div>
       )}
